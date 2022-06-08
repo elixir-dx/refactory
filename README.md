@@ -10,12 +10,12 @@ by adding `refinery` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:refinery, "~> 0.1.0", only: :test}
+    {:refinery, "~> 0.1.0", github: "infer-beam/refinery", only: :test}
   ]
 end
 ```
 
-Documentation can found at <https://hexdocs.pm/refinery>.
+Documentation can found at <https://infer-beam.github.io/refinery/>.
 
 ## Special thanks
 
