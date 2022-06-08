@@ -112,9 +112,9 @@ refinery
   </a>
   Refinements module
 </h2>
-<p>To start using Refinery, first define a refinements module:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="6911738073-1">do</span><span class="w">
+<p>To start using Refinery, first define a refinements module:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="9897808837-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
-</span><span class="k" data-group-id="6911738073-1">end</span></code></pre><h2 id="module-usage" class="section-heading">
+</span><span class="k" data-group-id="9897808837-1">end</span></code></pre><h2 id="module-usage" class="section-heading">
   <a href="#module-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">usage</p>
   </a>
@@ -132,68 +132,68 @@ refinery
   </a>
   Basic example
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="8604970450-1">do</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="1047250339-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
-</span><span class="k" data-group-id="8604970450-1">end</span><span class="w">
+</span><span class="k" data-group-id="1047250339-1">end</span><span class="w">
 
-</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="8604970450-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8604970450-3">%{</span><span class="w">
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="1047250339-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1047250339-3">%{</span><span class="w">
   </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Refined List&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8604970450-4">%{</span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test@email.org&quot;</span><span class="p" data-group-id="8604970450-4">}</span><span class="w">
-</span><span class="p" data-group-id="8604970450-3">}</span><span class="p" data-group-id="8604970450-2">)</span><span class="w">
+  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1047250339-4">%{</span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test@email.org&quot;</span><span class="p" data-group-id="1047250339-4">}</span><span class="w">
+</span><span class="p" data-group-id="1047250339-3">}</span><span class="p" data-group-id="1047250339-2">)</span><span class="w">
 
-</span><span class="p" data-group-id="8604970450-5">%</span><span class="nc" data-group-id="8604970450-5">MyApp.List</span><span class="p" data-group-id="8604970450-5">{</span><span class="w">
+</span><span class="p" data-group-id="1047250339-5">%</span><span class="nc" data-group-id="1047250339-5">MyApp.List</span><span class="p" data-group-id="1047250339-5">{</span><span class="w">
   </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Refined List&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8604970450-6">%</span><span class="nc" data-group-id="8604970450-6">MyApp.User</span><span class="p" data-group-id="8604970450-6">{</span><span class="w">
+  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1047250339-6">%</span><span class="nc" data-group-id="1047250339-6">MyApp.User</span><span class="p" data-group-id="1047250339-6">{</span><span class="w">
     </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test@email.org&quot;</span><span class="w">
-  </span><span class="p" data-group-id="8604970450-6">}</span><span class="w">
-</span><span class="p" data-group-id="8604970450-5">}</span></code></pre><h2 id="module-default-refinements" class="section-heading">
+  </span><span class="p" data-group-id="1047250339-6">}</span><span class="w">
+</span><span class="p" data-group-id="1047250339-5">}</span></code></pre><h2 id="module-default-refinements" class="section-heading">
   <a href="#module-default-refinements" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">default-refinements</p>
   </a>
   Default refinements
 </h2>
 <p>Default refinements can be defined in the refinements module.
-They are always applied first.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="9000723426-1">do</span><span class="w">
+They are always applied first.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="6149009002-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="9000723426-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="9000723426-2">)</span><span class="w"> </span><span class="k" data-group-id="9000723426-3">do</span><span class="w">
-    </span><span class="p" data-group-id="9000723426-4">%{</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="6149009002-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="6149009002-2">)</span><span class="w"> </span><span class="k" data-group-id="6149009002-3">do</span><span class="w">
+    </span><span class="p" data-group-id="6149009002-4">%{</span><span class="w">
       </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="w">
-    </span><span class="p" data-group-id="9000723426-4">}</span><span class="w">
-  </span><span class="k" data-group-id="9000723426-3">end</span><span class="w">
-</span><span class="k" data-group-id="9000723426-1">end</span><span class="w">
+    </span><span class="p" data-group-id="6149009002-4">}</span><span class="w">
+  </span><span class="k" data-group-id="6149009002-3">end</span><span class="w">
+</span><span class="k" data-group-id="6149009002-1">end</span><span class="w">
 
 
-</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="9000723426-5">(</span><span class="nc">MyApp.List</span><span class="p" data-group-id="9000723426-5">)</span><span class="w">
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="6149009002-5">(</span><span class="nc">MyApp.List</span><span class="p" data-group-id="6149009002-5">)</span><span class="w">
 
-</span><span class="p" data-group-id="9000723426-6">%</span><span class="nc" data-group-id="9000723426-6">MyApp.List</span><span class="p" data-group-id="9000723426-6">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p" data-group-id="9000723426-6">}</span></code></pre><h2 id="module-custom-refinements" class="section-heading">
+</span><span class="p" data-group-id="6149009002-6">%</span><span class="nc" data-group-id="6149009002-6">MyApp.List</span><span class="p" data-group-id="6149009002-6">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p" data-group-id="6149009002-6">}</span></code></pre><h2 id="module-custom-refinements" class="section-heading">
   <a href="#module-custom-refinements" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">custom-refinements</p>
   </a>
   Custom refinements
 </h2>
-<p>Custom refinements can be defined in the refinements module and then used by their name.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="8229086666-1">do</span><span class="w">
+<p>Custom refinements can be defined in the refinements module and then used by their name.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="2987446751-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="8229086666-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="8229086666-2">)</span><span class="w"> </span><span class="k" data-group-id="8229086666-3">do</span><span class="w">
-    </span><span class="p" data-group-id="8229086666-4">%{</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="2987446751-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="2987446751-2">)</span><span class="w"> </span><span class="k" data-group-id="2987446751-3">do</span><span class="w">
+    </span><span class="p" data-group-id="2987446751-4">%{</span><span class="w">
       </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="w">
-    </span><span class="p" data-group-id="8229086666-4">}</span><span class="w">
-  </span><span class="k" data-group-id="8229086666-3">end</span><span class="w">
+    </span><span class="p" data-group-id="2987446751-4">}</span><span class="w">
+  </span><span class="k" data-group-id="2987446751-3">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="8229086666-5">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="8229086666-5">)</span><span class="w"> </span><span class="k" data-group-id="8229086666-6">do</span><span class="w">
-    </span><span class="p" data-group-id="8229086666-7">%{</span><span class="w">
-      </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8229086666-8">%{</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="2987446751-5">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="2987446751-5">)</span><span class="w"> </span><span class="k" data-group-id="2987446751-6">do</span><span class="w">
+    </span><span class="p" data-group-id="2987446751-7">%{</span><span class="w">
+      </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2987446751-8">%{</span><span class="w">
         </span><span class="ss">role</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="w">
-      </span><span class="p" data-group-id="8229086666-8">}</span><span class="w">
-    </span><span class="p" data-group-id="8229086666-7">}</span><span class="w">
-  </span><span class="k" data-group-id="8229086666-6">end</span><span class="w">
-</span><span class="k" data-group-id="8229086666-1">end</span><span class="w">
+      </span><span class="p" data-group-id="2987446751-8">}</span><span class="w">
+    </span><span class="p" data-group-id="2987446751-7">}</span><span class="w">
+  </span><span class="k" data-group-id="2987446751-6">end</span><span class="w">
+</span><span class="k" data-group-id="2987446751-1">end</span><span class="w">
 
 
-</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="8229086666-9">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="8229086666-9">)</span><span class="w">
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="2987446751-9">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="2987446751-9">)</span><span class="w">
 
-</span><span class="p" data-group-id="8229086666-10">%</span><span class="nc" data-group-id="8229086666-10">MyApp.List</span><span class="p" data-group-id="8229086666-10">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8229086666-11">%</span><span class="nc" data-group-id="8229086666-11">MyApp.User</span><span class="p" data-group-id="8229086666-11">{</span><span class="ss">role</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="8229086666-11">}</span><span class="p" data-group-id="8229086666-10">}</span></code></pre>
+</span><span class="p" data-group-id="2987446751-10">%</span><span class="nc" data-group-id="2987446751-10">MyApp.List</span><span class="p" data-group-id="2987446751-10">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2987446751-11">%</span><span class="nc" data-group-id="2987446751-11">MyApp.User</span><span class="p" data-group-id="2987446751-11">{</span><span class="ss">role</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="2987446751-11">}</span><span class="p" data-group-id="2987446751-10">}</span></code></pre>
   </section>
 
 
