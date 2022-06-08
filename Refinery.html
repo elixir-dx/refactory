@@ -10,7 +10,7 @@
     <title>Refinery — refinery v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-18403b9977.js"></script>
+    <script src="dist/sidebar_items-d69386fcb2.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -62,7 +62,7 @@
   <div class="sidebar-header">
 
     <div class="sidebar-projectDetails">
-      <a href="readme.html" class="sidebar-projectName" translate="no">
+      <a href="Refinery.html" class="sidebar-projectName" translate="no">
 refinery
       </a>
       <strong class="sidebar-projectVersion" translate="no">
@@ -106,7 +106,94 @@ refinery
 
 
   <section id="moduledoc">
-<p>Documentation for <a href="Refinery.html#content"><code class="inline">Refinery</code></a>.</p>
+<p>Refinery allows generating Ecto records with nested overrides for your tests.</p><h2 id="module-refinements-module" class="section-heading">
+  <a href="#module-refinements-module" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">refinements-module</p>
+  </a>
+  Refinements module
+</h2>
+<p>To start using Refinery, first define a refinements module:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="2028292104-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
+</span><span class="k" data-group-id="2028292104-1">end</span></code></pre><h2 id="module-usage" class="section-heading">
+  <a href="#module-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usage</p>
+  </a>
+  Usage
+</h2>
+<p>The refinements module has two functions:</p><ul><li><a href="#build/2"><code class="inline">build/2</code></a> generates an Ecto record with the given refinements applied</li><li><a href="#create/2"><code class="inline">create/2</code></a> inserts an Ecto record into the database</li></ul><h2 id="module-refinements" class="section-heading">
+  <a href="#module-refinements" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">refinements</p>
+  </a>
+  Refinements
+</h2>
+<p>A refinement can be</p><ul><li>a <a href="https://hexdocs.pm/elixir/Map.html"><code class="inline">Map</code></a> in which each key-value pair is either<ul><li>a field with its value</li><li>an association with a refinement (for <code class="inline">belongs_to</code>, <code class="inline">has_one</code>, and <code class="inline">embeds_one</code>)</li><li><em>soon:</em> an association with a list of refinements (for <code class="inline">has_many</code> and <code class="inline">embeds_many</code>)</li></ul></li><li>a custom refinement defined in the refinements module (see below)</li><li>a <a href="https://hexdocs.pm/elixir/Tuple.html"><code class="inline">Tuple</code></a> with multiple refinements to be applied</li></ul><h2 id="module-basic-example" class="section-heading">
+  <a href="#module-basic-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">basic-example</p>
+  </a>
+  Basic example
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="5772314618-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
+</span><span class="k" data-group-id="5772314618-1">end</span><span class="w">
+
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="5772314618-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5772314618-3">%{</span><span class="w">
+  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Refined List&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5772314618-4">%{</span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test@email.org&quot;</span><span class="p" data-group-id="5772314618-4">}</span><span class="w">
+</span><span class="p" data-group-id="5772314618-3">}</span><span class="p" data-group-id="5772314618-2">)</span><span class="w">
+
+</span><span class="p" data-group-id="5772314618-5">%</span><span class="nc" data-group-id="5772314618-5">MyApp.List</span><span class="p" data-group-id="5772314618-5">{</span><span class="w">
+  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Refined List&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5772314618-6">%</span><span class="nc" data-group-id="5772314618-6">MyApp.User</span><span class="p" data-group-id="5772314618-6">{</span><span class="w">
+    </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test@email.org&quot;</span><span class="w">
+  </span><span class="p" data-group-id="5772314618-6">}</span><span class="w">
+</span><span class="p" data-group-id="5772314618-5">}</span></code></pre><h2 id="module-default-refinements" class="section-heading">
+  <a href="#module-default-refinements" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">default-refinements</p>
+  </a>
+  Default refinements
+</h2>
+<p>Default refinements can be defined in the refinements module.
+They are always applied first.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="3019251231-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="3019251231-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="3019251231-2">)</span><span class="w"> </span><span class="k" data-group-id="3019251231-3">do</span><span class="w">
+    </span><span class="p" data-group-id="3019251231-4">%{</span><span class="w">
+      </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="w">
+    </span><span class="p" data-group-id="3019251231-4">}</span><span class="w">
+  </span><span class="k" data-group-id="3019251231-3">end</span><span class="w">
+</span><span class="k" data-group-id="3019251231-1">end</span><span class="w">
+
+
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="3019251231-5">(</span><span class="nc">MyApp.List</span><span class="p" data-group-id="3019251231-5">)</span><span class="w">
+
+</span><span class="p" data-group-id="3019251231-6">%</span><span class="nc" data-group-id="3019251231-6">MyApp.List</span><span class="p" data-group-id="3019251231-6">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p" data-group-id="3019251231-6">}</span></code></pre><h2 id="module-custom-refinements" class="section-heading">
+  <a href="#module-custom-refinements" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">custom-refinements</p>
+  </a>
+  Custom refinements
+</h2>
+<p>Custom refinements can be defined in the refinements module and then used by their name.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Refinements</span><span class="w"> </span><span class="k" data-group-id="5134588806-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Refinery</span><span class="p">,</span><span class="w"> </span><span class="ss">repo</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="5134588806-2">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:default</span><span class="p" data-group-id="5134588806-2">)</span><span class="w"> </span><span class="k" data-group-id="5134588806-3">do</span><span class="w">
+    </span><span class="p" data-group-id="5134588806-4">%{</span><span class="w">
+      </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="w">
+    </span><span class="p" data-group-id="5134588806-4">}</span><span class="w">
+  </span><span class="k" data-group-id="5134588806-3">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">refinement</span><span class="p" data-group-id="5134588806-5">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="5134588806-5">)</span><span class="w"> </span><span class="k" data-group-id="5134588806-6">do</span><span class="w">
+    </span><span class="p" data-group-id="5134588806-7">%{</span><span class="w">
+      </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5134588806-8">%{</span><span class="w">
+        </span><span class="ss">role</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="w">
+      </span><span class="p" data-group-id="5134588806-8">}</span><span class="w">
+    </span><span class="p" data-group-id="5134588806-7">}</span><span class="w">
+  </span><span class="k" data-group-id="5134588806-6">end</span><span class="w">
+</span><span class="k" data-group-id="5134588806-1">end</span><span class="w">
+
+
+</span><span class="nc">MyApp.Refinements</span><span class="o">.</span><span class="n">build</span><span class="p" data-group-id="5134588806-9">(</span><span class="nc">MyApp.List</span><span class="p">,</span><span class="w"> </span><span class="ss">:with_admin_user</span><span class="p" data-group-id="5134588806-9">)</span><span class="w">
+
+</span><span class="p" data-group-id="5134588806-10">%</span><span class="nc" data-group-id="5134588806-10">MyApp.List</span><span class="p" data-group-id="5134588806-10">{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Default Title&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">created_by_user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5134588806-11">%</span><span class="nc" data-group-id="5134588806-11">MyApp.User</span><span class="p" data-group-id="5134588806-11">{</span><span class="ss">role</span><span class="p">:</span><span class="w"> </span><span class="ss">:admin</span><span class="p" data-group-id="5134588806-11">}</span><span class="p" data-group-id="5134588806-10">}</span></code></pre>
   </section>
 
 
@@ -130,7 +217,7 @@ refinery
 
         </div>
 
-          <div class="summary-synopsis"><p>Takes a schema type and returns an instance of it with the following layers of data applied</p></div>
+          <div class="summary-synopsis"><p>Generates an Ecto record with the given refinements applied</p></div>
 
       </div>
 
@@ -140,13 +227,7 @@ refinery
 
         </div>
 
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#do_build/3" translate="no">do_build(module, type, attrs)</a>
-
-        </div>
+          <div class="summary-synopsis"><p>Inserts an Ecto record with the given refinements applied into the database</p></div>
 
       </div>
 
@@ -175,7 +256,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">build(module, type, refinements \\ %{})</h1>
 
-      <a href="https://github.com/infer-beam/refinery/blob/v0.1.0/lib/refinery.ex#L27" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/infer-beam/refinery/blob/v0.1.0/lib/refinery.ex#L131" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -185,14 +266,7 @@ Functions
 
   <section class="docstring">
 
-<p>Takes a schema type and returns an instance of it with the following layers of data applied:</p><ol><li>Defaults for this type defined as <code class="inline">refinement(type, :default)</code></li><li><code class="inline">refinements</code> passed as second argument</li><li>For all referenced associations,
-a) Defaults for the association type defined in <code class="inline">build/1</code>
-b) Defaults passed by the previous layer, e.g.
- <code class="inline">%Offer{department: %{name: &quot;Construction&quot;}}</code> will override
- the <code class="inline">:name</code> on the associated <code class="inline">Department</code>
-c) <code class="inline">refinements</code> passed for this specific association name, e.g.
- passing <code class="inline">%{department: %{name: &quot;Carpentry&quot;}}</code> will override the <code class="inline">:name</code>
- of any <code class="inline">Department</code> directly or indirectly associated in the current branch</li></ol>
+<p>Generates an Ecto record with the given refinements applied</p>
   </section>
 </section>
 <section class="detail" id="create/3">
@@ -206,7 +280,7 @@ c) <code class="inline">refinements</code> passed for this specific association 
     </a>
     <h1 class="signature" translate="no">create(module, type, refinements \\ %{})</h1>
 
-      <a href="https://github.com/infer-beam/refinery/blob/v0.1.0/lib/refinery.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/infer-beam/refinery/blob/v0.1.0/lib/refinery.ex#L123" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -216,29 +290,7 @@ c) <code class="inline">refinements</code> passed for this specific association 
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="do_build/3">
-
-  <div class="detail-header">
-    <a href="#do_build/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">do_build(module, type, attrs)</h1>
-
-      <a href="https://github.com/infer-beam/refinery/blob/v0.1.0/lib/refinery.ex#L56" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Inserts an Ecto record with the given refinements applied into the database</p>
   </section>
 </section>
 
