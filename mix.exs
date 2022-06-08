@@ -59,10 +59,7 @@ defmodule Refinery.MixProject do
 
   def docs do
     [
-      extras: [
-        "README.md"
-      ],
-      main: "readme",
+      main: "Refinery",
       source_url: @source_url,
       source_ref: "v#{@version}"
     ]

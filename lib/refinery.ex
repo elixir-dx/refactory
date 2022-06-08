@@ -1,6 +1,104 @@
 defmodule Refinery do
   @moduledoc """
-  Documentation for `Refinery`.
+  Refinery allows generating Ecto records with nested overrides for your tests.
+
+  ## Refinements module
+
+  To start using Refinery, first define a refinements module:
+
+  ```
+  defmodule MyApp.Refinements do
+    use Refinery, repo: MyApp.Repo
+  end
+  ```
+
+  ## Usage
+
+  The refinements module has two functions:
+
+  - `build/2` generates an Ecto record with the given refinements applied
+  - `create/2` inserts an Ecto record into the database
+
+  ## Refinements
+
+  A refinement can be
+  - a `Map` in which each key-value pair is either
+    - a field with its value
+    - an association with a refinement (for `belongs_to`, `has_one`, and `embeds_one`)
+    - _soon:_ an association with a list of refinements (for `has_many` and `embeds_many`)
+  - a custom refinement defined in the refinements module (see below)
+  - a `Tuple` with multiple refinements to be applied
+
+  ## Basic example
+
+  ```
+  defmodule MyApp.Refinements do
+    use Refinery, repo: MyApp.Repo
+  end
+
+  MyApp.Refinements.build(MyApp.List, %{
+    title: "Refined List",
+    created_by_user: %{email: "test@email.org"}
+  })
+
+  %MyApp.List{
+    title: "Refined List",
+    created_by_user: %MyApp.User{
+      email: "test@email.org"
+    }
+  }
+  ```
+
+  ## Default refinements
+
+  Default refinements can be defined in the refinements module.
+  They are always applied first.
+
+  ```
+  defmodule MyApp.Refinements do
+    use Refinery, repo: MyApp.Repo
+
+    def refinement(MyApp.List, :default) do
+      %{
+        title: "Default Title"
+      }
+    end
+  end
+
+
+  MyApp.Refinements.build(MyApp.List)
+
+  %MyApp.List{title: "Default Title"}
+  ```
+
+  ## Custom refinements
+
+  Custom refinements can be defined in the refinements module and then used by their name.
+
+  ```
+  defmodule MyApp.Refinements do
+    use Refinery, repo: MyApp.Repo
+
+    def refinement(MyApp.List, :default) do
+      %{
+        title: "Default Title"
+      }
+    end
+
+    def refinement(MyApp.List, :with_admin_user) do
+      %{
+        created_by_user: %{
+          role: :admin
+        }
+      }
+    end
+  end
+
+
+  MyApp.Refinements.build(MyApp.List, :with_admin_user)
+
+  %MyApp.List{title: "Default Title", created_by_user: %MyApp.User{role: :admin}}
+  ```
   """
 
   defmacro __using__(opts) do
@@ -19,28 +117,18 @@ defmodule Refinery do
     end
   end
 
+  @doc """
+  Inserts an Ecto record with the given refinements applied into the database
+  """
   def create(module, type, refinements \\ %{}) do
     repo = module.refinery_repo()
     build(module, type, refinements) |> repo.insert!()
   end
 
-  def build(module, type, refinements \\ %{})
-
   @doc """
-  Takes a schema type and returns an instance of it with the following layers of data applied:
-
-    1. Defaults for this type defined as `refinement(type, :default)`
-    2. `refinements` passed as second argument
-    3. For all referenced associations,
-      a) Defaults for the association type defined in `build/1`
-      b) Defaults passed by the previous layer, e.g.
-        `%Offer{department: %{name: "Construction"}}` will override
-        the `:name` on the associated `Department`
-      c) `refinements` passed for this specific association name, e.g.
-        passing `%{department: %{name: "Carpentry"}}` will override the `:name`
-        of any `Department` directly or indirectly associated in the current branch
+  Generates an Ecto record with the given refinements applied
   """
-  def build(module, type, refinements) do
+  def build(module, type, refinements \\ %{}) do
     case resolve_refinement(module, type, {:default, refinements}) do
       record = %{__struct__: ^module} ->
         record
@@ -53,7 +141,7 @@ defmodule Refinery do
     end
   end
 
-  def do_build(module, type, attrs) do
+  defp do_build(module, type, attrs) do
     record = struct!(type, attrs)
 
     # set associations in record
