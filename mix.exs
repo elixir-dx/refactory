@@ -49,8 +49,9 @@ defmodule Refinery.MixProject do
 
   defp deps do
     [
+      {:ecto, "~> 3.0"},
+
       # dev & test
-      {:ecto, "~> 3.0", only: [:dev, :test]},
       {:ecto_sql, "~> 3.0", only: [:dev, :test]},
       {:postgrex, "~> 0.14", only: :test, runtime: false},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false}
