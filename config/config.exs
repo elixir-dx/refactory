@@ -10,11 +10,11 @@ import Config
 
 # You can configure your application as:
 #
-#     config :refinery, key: :value
+#     config :refactory, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:refinery, :key)
+#     Application.get_env(:refactory, :key)
 #
 # You can also configure a 3rd-party app:
 #

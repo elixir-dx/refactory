@@ -1,7 +1,7 @@
-defmodule Refinery.Test.Schema.ListTag do
+defmodule Refactory.Test.Schema.ListTag do
   use Ecto.Schema
 
-  alias Refinery.Test.Schema.List
+  alias Refactory.Test.Schema.List
 
   schema "list_tags" do
     belongs_to(:list, List)

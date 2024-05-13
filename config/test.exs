@@ -1,6 +1,6 @@
 import Config
 
-config :refinery, Refinery.Test.Repo,
+config :refactory, Refactory.Test.Repo,
   hostname: "localhost",
   username: "postgres",
   password: "postgres",
@@ -8,8 +8,8 @@ config :refinery, Refinery.Test.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   priv: "test/schema"
 
-config :refinery,
-  ecto_repos: [Refinery.Test.Repo],
-  repo: Refinery.Test.Repo
+config :refactory,
+  ecto_repos: [Refactory.Test.Repo],
+  repo: Refactory.Test.Repo
 
 config :logger, level: :warn

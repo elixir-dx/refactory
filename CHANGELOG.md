@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Refinements modules via `use Refinery, repo: MyApp.Repo`
-- Default refinement for each Ecto schema type
-- Custom refinements
+- Traits modules via `use Refactory, repo: MyApp.Repo`
+- Default trait for each Ecto schema type
+- Custom traits
 - Initial docs

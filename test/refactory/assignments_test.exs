@@ -1,22 +1,22 @@
-defmodule Refinery.AssignmentsTest do
-  use Refinery.Test.DataCase
+defmodule Refactory.AssignmentsTest do
+  use Refactory.Test.DataCase
 
   defmodule Factories do
-    use Refinery, repo: Refinery.Test.Repo
+    use Refactory, repo: Refactory.Test.Repo
 
-    def refinement(List, :default) do
+    def trait(List, :default) do
       %{
         title: Enum.random(~w[Learning Professional Travel])
       }
     end
 
-    def refinement(List, :with_user) do
+    def trait(List, :with_user) do
       %{
         created_by: %{}
       }
     end
 
-    def refinement(ListTag, :default) do
+    def trait(ListTag, :default) do
       %{
         name: Enum.random(~w[easy medium hard]),
         list: %{
@@ -25,7 +25,7 @@ defmodule Refinery.AssignmentsTest do
       }
     end
 
-    def refinement(User, :default) do
+    def trait(User, :default) do
       %{
         email: "default@email.org"
       }

@@ -1,8 +1,8 @@
-defmodule Refinery.PlainTest do
-  use Refinery.Test.DataCase
+defmodule Refactory.PlainTest do
+  use Refactory.Test.DataCase
 
   defmodule Factories do
-    use Refinery, repo: Refinery.Test.Repo
+    use Refactory, repo: Refactory.Test.Repo
   end
 
   test "builds simple record" do

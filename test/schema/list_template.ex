@@ -1,7 +1,7 @@
-defmodule Refinery.Test.Schema.ListTemplate do
+defmodule Refactory.Test.Schema.ListTemplate do
   use Ecto.Schema
 
-  alias Refinery.Test.Schema.List
+  alias Refactory.Test.Schema.List
 
   schema "list_templates" do
     field(:title, :string)

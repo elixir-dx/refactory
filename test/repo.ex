@@ -1,5 +1,5 @@
-defmodule Refinery.Test.Repo do
+defmodule Refactory.Test.Repo do
   use Ecto.Repo,
-    otp_app: :refinery,
+    otp_app: :refactory,
     adapter: Ecto.Adapters.Postgres
 end

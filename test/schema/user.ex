@@ -1,7 +1,7 @@
-defmodule Refinery.Test.Schema.User do
+defmodule Refactory.Test.Schema.User do
   use Ecto.Schema
 
-  alias Refinery.Test.Schema.List
+  alias Refactory.Test.Schema.List
 
   schema "users" do
     field(:email, :string)

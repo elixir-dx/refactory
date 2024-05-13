@@ -1,24 +1,127 @@
-# Refinery
+# Refactory
 
-An Elixir library to generate test data recursively with refinements
+An Elixir library to generate test data recursively with traits
 
 ## Installation
 
 The package can be installed
-by adding `refinery` to your list of dependencies in `mix.exs`:
+by adding `refactory` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:refinery, "~> 0.1.0", github: "infer-beam/refinery", only: :test}
+    {:refactory, "~> 0.1.0", only: :test}
   ]
 end
 ```
 
-Documentation can found at <https://infer-beam.github.io/refinery/>.
+Documentation can found at <https://hexdocs.pm/refactory/>.
+
+<!-- MODULEDOC -->
+Refactory allows generating Ecto records with nested overrides for your tests.
+
+## Factory module
+
+To start using Refactory, first define a factory module:
+
+```
+defmodule MyApp.Factory do
+  use Refactory, repo: MyApp.Repo
+end
+```
+
+## Usage
+
+The factory module has two functions:
+
+- `build/2` generates an Ecto record with the given traits applied
+- `create/2` inserts an Ecto record into the database
+
+## Traits
+
+A trait can be
+- a `Map` in which each key-value pair is either
+  - a field with its value
+  - an association with a trait (for `belongs_to`, `has_one`, and `embeds_one`)
+  - _soon:_ an association with a list of traits (for `has_many` and `embeds_many`)
+- a custom trait defined in the factory module (see below)
+- a `Tuple` with multiple traits to be applied
+
+## Basic example
+
+```
+defmodule MyApp.Factory do
+  use Refactory, repo: MyApp.Repo
+end
+
+MyApp.Factory.build(MyApp.List, %{
+  title: "Refined List",
+  created_by_user: %{email: "test@email.org"}
+})
+
+%MyApp.List{
+  title: "Refined List",
+  created_by_user: %MyApp.User{
+    email: "test@email.org"
+  }
+}
+```
+
+## Default traits
+
+Default traits can be defined in the factory module.
+They are always applied first.
+
+```
+defmodule MyApp.Factory do
+  use Refactory, repo: MyApp.Repo
+
+  def trait(MyApp.List, :default) do
+    %{
+      title: "Default Title"
+    }
+  end
+end
+
+
+MyApp.Factory.build(MyApp.List)
+
+%MyApp.List{title: "Default Title"}
+```
+
+## Custom traits
+
+Custom traits can be defined in the factory module and then used by their name.
+
+```
+defmodule MyApp.Factory do
+  use Refactory, repo: MyApp.Repo
+
+  def trait(MyApp.List, :default) do
+    %{
+      title: "Default Title"
+    }
+  end
+
+  def trait(MyApp.List, :with_admin_user) do
+    %{
+      created_by_user: %{
+        role: :admin
+      }
+    }
+  end
+end
+
+
+MyApp.Factory.build(MyApp.List, :with_admin_user)
+
+%MyApp.List{title: "Default Title", created_by_user: %MyApp.User{role: :admin}}
+```
+
+<!-- MODULEDOC -->
 
 ## Special thanks
 
 This project is sponsored and kindly supported by [Team Engine](https://www.teamengine.co.uk/).
 
-If you'd like to join us working on [Infer](https://github.com/infer-beam/infer) and Refinery as a contractor, please [reach out](https://tinyurl.com/engine-infer-dev2).
+If you'd like to join us working on [Dx](https://github.com/elixir-dx/dx) and Refactory as a contractor, please reach out to @arnodirlam.

@@ -3,7 +3,7 @@
   inputs: [
     "*.{ex,exs}",
     "{config,lib}/**/*.{ex,exs}",
-    "test/{refinery,support}/**/*.{ex,exs}",
+    "test/{refactory,support}/**/*.{ex,exs}",
     "test/*.{ex,exs}"
   ],
   import_deps: [:ecto],

@@ -1,4 +1,4 @@
-defmodule Refinery.Test.DataCase do
+defmodule Refactory.Test.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,16 +16,16 @@ defmodule Refinery.Test.DataCase do
 
   using do
     quote do
-      alias Refinery.Test.Repo
-      alias Refinery.Test.Schema.{List, ListTag, ListTemplate, Task, User}
+      alias Refactory.Test.Repo
+      alias Refactory.Test.Schema.{List, ListTag, ListTemplate, Task, User}
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Refinery.Test.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Refactory.Test.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Refinery.Test.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Refactory.Test.Repo, {:shared, self()})
     end
 
     :ok

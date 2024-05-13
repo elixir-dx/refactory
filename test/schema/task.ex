@@ -1,7 +1,7 @@
-defmodule Refinery.Test.Schema.Task do
+defmodule Refactory.Test.Schema.Task do
   use Ecto.Schema
 
-  alias Refinery.Test.Schema.{List, User}
+  alias Refactory.Test.Schema.{List, User}
 
   schema "tasks" do
     field(:title, :string)

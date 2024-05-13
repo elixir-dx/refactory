@@ -1,12 +1,12 @@
-defmodule Refinery.MixProject do
+defmodule Refactory.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/infer-beam/refinery"
+  @source_url "https://github.com/elixir-dx/refactory"
   @version "0.1.0"
 
   def project do
     [
-      app: :refinery,
+      app: :refactory,
       version: @version,
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
@@ -20,12 +20,12 @@ defmodule Refinery.MixProject do
 
   defp package do
     [
-      description: "Generate test data recursively with refinements",
+      description: "Generate test data recursively with traits",
       files: ["lib", "mix.exs", "README*"],
       maintainers: ["Arno Dirlam"],
       licenses: ["MIT"],
       links: %{
-        Changelog: "https://github.com/infer-beam/refinery/blob/main/CHANGELOG.md",
+        Changelog: "https://github.com/elixir-dx/refactory/blob/main/CHANGELOG.md",
         GitHub: @source_url
       }
     ]
@@ -60,7 +60,7 @@ defmodule Refinery.MixProject do
 
   def docs do
     [
-      main: "Refinery",
+      main: "Refactory",
       source_url: @source_url,
       source_ref: "v#{@version}"
     ]

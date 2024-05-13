@@ -1,4 +1,4 @@
-defmodule Refinery.Test.Repo.Migrations.CreateBaseSchema do
+defmodule Refactory.Test.Repo.Migrations.CreateBaseSchema do
   use Ecto.Migration
 
   def change do
