@@ -117,11 +117,21 @@ MyApp.Factory.build(MyApp.List, :with_admin_user)
 
 %MyApp.List{title: "Default Title", created_by_user: %MyApp.User{role: :admin}}
 ```
-
 <!-- MODULEDOC -->
+
+## Why another factory library?
+
+To my knowledge, this is the only factory library that supports recursive traits,
+providing a powerful declarative appraoch to (test) data generation.
+
+Recursive and/or nested approaches might be tricky in non-functional programming
+languages, because the resulting objects often encapsulate internal state.
+In Elixir, however, data structures are cleanly separated from behavior,
+making it a great field of application for recursive data structure generation.
 
 ## Special thanks
 
 This project is sponsored and kindly supported by [Team Engine](https://www.teamengine.co.uk/).
 
-If you'd like to join us working on [Dx](https://github.com/elixir-dx/dx) and Refactory as a contractor, please reach out to @arnodirlam.
+If you'd like to join us working on [Dx](https://github.com/elixir-dx/dx) and Refactory
+as a contractor, please reach out to [@arnodirlam](https://github.com/arnodirlam).
