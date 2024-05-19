@@ -130,7 +130,13 @@ defmodule Refactory do
     struct!(type, deep_merge(Map.from_struct(left), Map.from_struct(right)))
   end
 
-  defp deep_resolve(_key, %{__struct__: type}, %{__struct__: other_type}, _concat_lists?, _struct_overrides?) do
+  defp deep_resolve(
+         _key,
+         %{__struct__: type},
+         %{__struct__: other_type},
+         _concat_lists?,
+         _struct_overrides?
+       ) do
     raise ArgumentError, "#{type} cannot be merged with #{other_type}."
   end
 
