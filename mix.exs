@@ -2,12 +2,11 @@ defmodule Refactory.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/elixir-dx/refactory"
-  @version "0.1.0"
 
   def project do
     [
       app: :refactory,
-      version: @version,
+      version: version(),
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -62,7 +61,7 @@ defmodule Refactory.MixProject do
     [
       main: "Refactory",
       source_url: @source_url,
-      source_ref: "v#{@version}"
+      source_ref: "v#{version()}"
     ]
   end
 
@@ -72,5 +71,11 @@ defmodule Refactory.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.reset", "test"]
     ]
+  end
+
+  defp version do
+    "VERSION"
+    |> File.read!()
+    |> String.trim()
   end
 end
