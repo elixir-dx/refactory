@@ -20,7 +20,7 @@ defmodule Refactory.MixProject do
   defp package do
     [
       description: "Generate test data recursively with traits",
-      files: ["lib", "mix.exs", "README*"],
+      files: ["lib", "mix.exs", "README*", "VERSION"],
       maintainers: ["Arno Dirlam"],
       licenses: ["MIT"],
       links: %{

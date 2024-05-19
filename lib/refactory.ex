@@ -33,11 +33,11 @@ defmodule Refactory do
   """
   def build(module, type, traits \\ %{}) do
     case resolve_refinement(module, type, {:default, traits}) do
-      record = %{__struct__: ^module} ->
+      record = %{__struct__: ^type} ->
         record
 
-      record = %{__struct__: _module} ->
-        raise ArgumentError, "Expected a struct of type #{module}. Got #{inspect(record)}"
+      record = %{__struct__: _other_type} ->
+        raise ArgumentError, "Expected a struct of type #{type}. Got #{inspect(record)}"
 
       attrs ->
         do_build(module, type, attrs)
@@ -130,12 +130,8 @@ defmodule Refactory do
     struct!(type, deep_merge(Map.from_struct(left), Map.from_struct(right)))
   end
 
-  defp deep_resolve(_key, %{__struct__: type}, _right, _concat_lists?, _struct_overrides?) do
-    raise ArgumentError, "#{type} cannot be merged with non-#{type}."
-  end
-
-  defp deep_resolve(_key, _left, %{__struct__: type}, _concat_lists?, _struct_overrides?) do
-    raise ArgumentError, "Non-#{type} cannot be merged with #{type}."
+  defp deep_resolve(_key, %{__struct__: type}, %{__struct__: other_type}, _concat_lists?, _struct_overrides?) do
+    raise ArgumentError, "#{type} cannot be merged with #{other_type}."
   end
 
   defp deep_resolve(_key, %{} = left, %{} = right, _concat_lists?, _struct_overrides?) do

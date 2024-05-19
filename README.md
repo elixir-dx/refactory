@@ -10,7 +10,7 @@ by adding `refactory` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:refactory, "~> 0.1.0", only: :test}
+    {:refactory, "~> 0.1.1", only: :test}
   ]
 end
 ```
@@ -24,7 +24,7 @@ Refactory allows generating Ecto records with nested overrides for your tests.
 
 To start using Refactory, first define a factory module:
 
-```
+```elixir
 defmodule MyApp.Factory do
   use Refactory, repo: MyApp.Repo
 end
@@ -49,7 +49,7 @@ A trait can be
 
 ## Basic example
 
-```
+```elixir
 defmodule MyApp.Factory do
   use Refactory, repo: MyApp.Repo
 end
@@ -72,7 +72,7 @@ MyApp.Factory.build(MyApp.List, %{
 Default traits can be defined in the factory module.
 They are always applied first.
 
-```
+```elixir
 defmodule MyApp.Factory do
   use Refactory, repo: MyApp.Repo
 
@@ -93,7 +93,7 @@ MyApp.Factory.build(MyApp.List)
 
 Custom traits can be defined in the factory module and then used by their name.
 
-```
+```elixir
 defmodule MyApp.Factory do
   use Refactory, repo: MyApp.Repo
 

@@ -1,7 +1,7 @@
-defmodule Test.Support.RefinementsTest do
+defmodule Test.Support.TraitsTest do
   use Refactory.Test.DataCase, async: true
 
-  defmodule Traits do
+  defmodule Factories do
     use Refactory, repo: Refactory.Test.Repo
 
     def trait(List, :default) do
@@ -32,7 +32,7 @@ defmodule Test.Support.RefinementsTest do
 
   test "works with normal overrides" do
     now = DateTime.utc_now()
-    list = Traits.build(List, %{archived_at: now})
+    list = Factories.build(List, %{archived_at: now})
 
     assert %List{
              archived_at: ^now,
@@ -41,7 +41,7 @@ defmodule Test.Support.RefinementsTest do
   end
 
   test "works with nested overrides" do
-    list_tag = Traits.build(ListTag, %{list: %{created_by: %{last_name: "Vega"}}})
+    list_tag = Factories.build(ListTag, %{list: %{created_by: %{last_name: "Vega"}}})
 
     assert %ListTag{
              list: %List{
@@ -53,9 +53,9 @@ defmodule Test.Support.RefinementsTest do
   end
 
   test "works with struct override" do
-    user = Traits.build(User)
+    user = Factories.build(User)
 
-    record = Traits.build(ListTag, %{list: %{created_by: user}})
+    record = Factories.build(ListTag, %{list: %{created_by: user}})
 
     assert %ListTag{
              list: %List{
@@ -65,15 +65,15 @@ defmodule Test.Support.RefinementsTest do
   end
 
   test "raises on invalid struct override" do
-    user = Traits.build(User)
+    user = Factories.build(User)
 
     assert_raise ArgumentError, fn ->
-      Traits.build(ListTag, %{list: user})
+      Factories.build(ListTag, %{list: user})
     end
   end
 
   test "works with simple trait" do
-    list_tag = Traits.build(ListTag, %{list: %{created_by: :refined}})
+    list_tag = Factories.build(ListTag, %{list: %{created_by: :refined}})
 
     assert %ListTag{
              list: %List{
@@ -89,7 +89,7 @@ defmodule Test.Support.RefinementsTest do
   #     department = get_dept_by(name: "Construction")
 
   #     record =
-  #       Traits.build(
+  #       Factories.build(
   #         Timecards.TimecardData,
   #         %{timecard: %{offer: {:department_name, "Construction"}}}
   #       )
@@ -107,7 +107,7 @@ defmodule Test.Support.RefinementsTest do
   #     department = get_dept_by(name: "Construction")
 
   #     record =
-  #       Traits.build(
+  #       Factories.build(
   #         Timecards.TimecardData,
   #         %{timecard: %{offer: %{department: {:name, "Construction"}}}}
   #       )
@@ -123,13 +123,13 @@ defmodule Test.Support.RefinementsTest do
 
   test "raises on unknown trait" do
     assert_raise ArgumentError, fn ->
-      Traits.build(List, %{created_by: :unknown})
+      Factories.build(List, %{created_by: :unknown})
     end
   end
 
   test "works with trait + override" do
     record =
-      Traits.build(
+      Factories.build(
         ListTag,
         %{
           list: %{
