@@ -5,10 +5,10 @@ defmodule Refactory do
              |> Enum.at(1)
 
   defmacro __using__(opts) do
+    repo = Keyword.fetch!(opts, :repo)
+
     quote location: :keep do
-      def refinery_repo() do
-        unquote(opts[:repo])
-      end
+      def refinery_repo(), do: unquote(repo)
 
       def create(type, traits \\ %{}) do
         Refactory.create(__MODULE__, type, traits)
@@ -25,7 +25,7 @@ defmodule Refactory do
   """
   def create(module, type, traits \\ %{}) do
     repo = module.refinery_repo()
-    build(module, type, traits) |> repo.insert!()
+    build(module, type, traits) |> repo.insert!(returning: true)
   end
 
   @doc """
@@ -33,10 +33,10 @@ defmodule Refactory do
   """
   def build(module, type, traits \\ %{}) do
     case resolve_refinement(module, type, {:default, traits}) do
-      record = %{__struct__: ^type} ->
+      record when is_struct(record, type) ->
         record
 
-      record = %{__struct__: _other_type} ->
+      record when is_struct(record) ->
         raise ArgumentError, "Expected a struct of type #{type}. Got #{inspect(record)}"
 
       attrs ->
