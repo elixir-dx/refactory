@@ -32,7 +32,7 @@ defmodule Refactory do
   Generates an Ecto record with the given traits applied
   """
   def build(module, type, traits \\ %{}) do
-    case resolve_refinement(module, type, {:default, traits}) do
+    case resolve_trait(module, type, {:default, traits}) do
       record = %{__struct__: ^type} ->
         record
 
@@ -78,34 +78,34 @@ defmodule Refactory do
     end)
   end
 
-  defp resolve_refinement(module, type, :default) do
+  defp resolve_trait(module, type, :default) do
     module.trait(type, :default)
   rescue
     _e in [UndefinedFunctionError, FunctionClauseError] -> %{}
     e -> reraise e, __STACKTRACE__
   end
 
-  defp resolve_refinement(module, type, trait) do
+  defp resolve_trait(module, type, trait) do
     module.trait(type, trait)
   rescue
     _e in [UndefinedFunctionError, FunctionClauseError] ->
-      merge_refinements(module, type, trait, %{})
+      merge_traits(module, type, trait, %{})
 
     e ->
       reraise e, __STACKTRACE__
   end
 
-  defp merge_refinements(module, type, traits, result) when is_tuple(traits) do
+  defp merge_traits(module, type, traits, result) when is_tuple(traits) do
     traits
     |> Tuple.to_list()
-    |> Enum.reduce(result, &deep_merge(&2, resolve_refinement(module, type, &1), false, true))
+    |> Enum.reduce(result, &deep_merge(&2, resolve_trait(module, type, &1), false, true))
   end
 
-  defp merge_refinements(_module, _type, traits, result) when is_map(traits) do
+  defp merge_traits(_module, _type, traits, result) when is_map(traits) do
     deep_merge(result, traits, false)
   end
 
-  defp merge_refinements(module, type, trait, _result) do
+  defp merge_traits(module, type, trait, _result) do
     raise ArgumentError, "Unknown trait for #{type} in #{module}: #{inspect(trait)}"
   end
 
