@@ -6,7 +6,7 @@ defmodule Refactory do
 
   defmacro __using__(opts) do
     quote location: :keep do
-      def refinery_repo() do
+      def refactory_repo() do
         unquote(opts[:repo])
       end
 
@@ -24,7 +24,7 @@ defmodule Refactory do
   Inserts an Ecto record with the given traits applied into the database
   """
   def create(module, type, traits \\ %{}) do
-    repo = module.refinery_repo()
+    repo = module.refactory_repo()
     build(module, type, traits) |> repo.insert!()
   end
 

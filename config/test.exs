@@ -4,7 +4,7 @@ config :refactory, Refactory.Test.Repo,
   hostname: "localhost",
   username: "postgres",
   password: "postgres",
-  database: "refinery_test",
+  database: "refactory_test",
   pool: Ecto.Adapters.SQL.Sandbox,
   priv: "test/schema"
 
